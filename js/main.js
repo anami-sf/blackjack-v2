@@ -38,9 +38,9 @@ const Initialize = () => {
 
 Initialize()
 
-//console.log(cardDeck)
 /*----- app's state (variables) -----*/ 
 /*----- cached element references -----*/
+
 
 //pop card from deck
 //push card into hand
@@ -50,14 +50,18 @@ const dealtCard = cardDeck.pop()
 
 
 /*----- functions -----*/
-const hit  = (evt) => {
-    const dealtCard = cardDeck.pop()
-    $('#player-hand').append(`<img class="cardImg" src=${dealtCard.img} alt="jQuery">`)
 
-    console.log('el', $('#dealer-hand').children().length)
+const draw = (hand) => {
+    const dealtCard = cardDeck.pop()
+    const imgEl = `<img class="cardImg" src=${dealtCard.img}  alt="jQuery">`
+
+    $(`#${hand}`).append(imgEl)    
 }
 
 const deal = (evt) => {
+    
+    console.log('playerCards', playerCards)
+
     if (evt.target.getAttribute("id") === "hit") {
         console.log('Cliekd hit')
         draw(playerHand)
@@ -65,15 +69,20 @@ const deal = (evt) => {
         console.log('Cliekd stay')
         draw(dealerHand)
     } else {
-        console.log("Clicked Play")
+
+        //TODO: switch logic of loop to go by length of each player's hand. 
+
+        var dealerCards = $('#dealer-hand').children().length
+        var playerCards = $('#player-hand').children().length
+
+        numbers = [1,2]
+        for(num of numbers) {
+            console.log('dealerCards', dealerCards)
+            draw(playerHand)
+            draw(dealerHand)
+        }
     }
-}
 
-const draw = (hand) => {
-    const dealtCard = cardDeck.pop()
-    $(`#${hand}`).append(`<img class="cardImg" src=${dealtCard.img} alt="jQuery">`)
-
-    console.log('el', $('#dealer-hand').children().length)
 }
 
 /*----- event listeners -----*/ 
