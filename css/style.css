@@ -1,4 +1,5 @@
 body {
+    height: 100vmin
     box-sizing: border-box;
     display: flex;
     flex-flow: column nowrap;
@@ -9,7 +10,7 @@ body {
 }
 
 div, footer, input {
-    margin: 5vmin;
+    margin: 2vmin;
 }
 
 .card {
@@ -24,6 +25,7 @@ div, footer, input {
 
 #dealer-hand {
     background-color: green;
+    /* margin-top: 5vmin; */
 }
 
 #player-hand {
