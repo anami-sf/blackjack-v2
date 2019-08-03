@@ -46,12 +46,20 @@ console.log(cardDeck[0])
 const dealtCard = cardDeck.pop()
 
 
-const $dealerHand = $('#dealer-Hand').html(
-`<div class="card"><img class="cardImg" src=${dealtCard.img} alt="jQuery"></div>`)
 
+/*----- functions -----*/
+const hit  = (evt) => {
+    const dealtCard = cardDeck.pop()
+    $('#player-hand').append(`<img class="cardImg" src=${dealtCard.img} alt="jQuery">`)
+
+    console.log('el', $('#dealer-hand').children().length)
+}
 
 /*----- event listeners -----*/ 
-/*----- functions -----*/
+$('#hit').on('click', hit)
+
+
+
 
 
 

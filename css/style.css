@@ -3,6 +3,8 @@ body {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    justify-content: center;
+    align-content: center;
 
 }
 
@@ -15,6 +17,15 @@ div, footer, input {
 }
 
 .cardImg {
-    width: 15vmin;
+    width: 20vmin;
     height: auto;
+    margin: 3vmin;
+}
+
+#dealer-hand {
+    background-color: green;
+}
+
+#player-hand {
+    background-color: yellow;
 }
