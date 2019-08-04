@@ -83,10 +83,11 @@ const getScore = (hand) => {
 }
 
 function isBust() {
-    if (playerScore > 21){
-        bust = true
+    if (playerScore <= 21){
+        return false
+    } else {
         return true
-    }    
+    }
 }
 
 const checkForWinner = () => {
@@ -98,10 +99,8 @@ const checkForWinner = () => {
 }
 
 const getStatus = () => {
-    
-    isBust()
 
-    if (bust) {
+    if (isBust()) {
         console.log('Dealer wins')
     } else if (!stay) {
         console.log('Player Turn')
@@ -121,11 +120,20 @@ const render = () => {
     renderCardImg('dealer-hand', dealerHand)
 }
 
-const deal = (evt) => {
+// const deal = (hand, handScore) => {
+//     console.log('deal')
+//     hand.push(draw())
+//     const score = getScore(hand)
+//     handScore = score
+//     debugger
+// }
+
+const handleClick = (evt) => {
 
     if (evt.target.id === "hit") {
         playerHand.push(draw())
         playerScore = getScore(playerHand)
+        //deal(playerHand, playerScore)
     } else if (evt.target.id === "stay") {
         stay = true
         while( dealerScore < 18) {
@@ -149,7 +157,7 @@ const deal = (evt) => {
 }
 
 /*----- event listeners -----*/ 
-$('#control-panel').on('click', deal)
+$('#control-panel').on('click', handleClick)
 
 
 
