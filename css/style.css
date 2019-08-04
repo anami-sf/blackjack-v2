@@ -1,5 +1,6 @@
 body {
-    height: 100vmin
+    background-color: rgb(61, 148, 73);
+    height: 100vmin;
     box-sizing: border-box;
     display: flex;
     flex-flow: column nowrap;
@@ -24,10 +25,11 @@ div, footer, input {
 }
 
 #dealer-hand {
-    background-color: green;
+    background-color: rgb(61, 148, 73);
     /* margin-top: 5vmin; */
 }
 
 #player-hand {
-    background-color: yellow;
+    background-color: rgb(168, 167, 167)
 }
+
