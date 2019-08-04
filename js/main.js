@@ -1,6 +1,19 @@
+//TODO: Add opening image
+//TODO: Scramble Deck
+//TODO: Render status
+//TODO: Click buttons only when appropriate 
+
 /*----- constants -----*/ 
 
-//var dealerCards = $('#dealer-hand').children().length
+const value= (num) => {
+    if (typeof num === 'number') {
+        return num 
+    } else if (num === 'A') { 
+        return 1
+    } else {
+        return 10
+    }
+}
 
 const numArr = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A' ];
 const suitArr = ['H', 'D', 'S', 'C' ];
@@ -13,34 +26,23 @@ const buildCardDeck = (arr1, arr2) => {
 
     for(const num of arr1){
         for(const suit of arr2){
-            const value= (num) => {
-                if (typeof num === 'number') {
-                    return num 
-                } else if (num === 'A') { 
-                    return 1
-                } else {
-                    return 10
-                }
-            }
             const cardObj = {
                 value: value(num), 
                 key: `${num}${suit}`,
                 img: `images/CardImages/${num}${suit}.jpg`
             };
-
             cardDeck.push(cardObj);
         }
     }
 }
 
 
-
 /*----- app's state (variables) -----*/ 
-let playerHand, playerScore, dealerHand, dealerScore, turn, dealtCard, stay, winner, bust;
+let playerHand, playerScore, dealerHand, dealerScore, dealtCard, stay, winner, gameStatus;
 
 /*----- cached element references -----*/
 
-
+//var dealerCards = $('#dealer-hand').children().length
 
 /*----- functions -----*/
 
@@ -50,23 +52,11 @@ const Initialize = () => {
     playerScore = 0
     dealerHand = []
     dealerScore = 0
-    turn = true
     stay = false
-    bust = false
+    winner = null
 }
 
 Initialize()
-
-// TODO: refactor parameters
-const renderCardImg = (handEl, hand) => {
-    for (card of hand) {
-        $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card">`)
-    }
-}
-
-
-
-// TODO: turn into arrow 
 
 const draw = () => {
     dealtCard = cardDeck.pop()
@@ -91,24 +81,20 @@ function isBust() {
 }
 
 const checkForWinner = () => {
-    if ( playerScore === 21 || (playerScore > dealerScore)){
+    if ( playerScore === 21 || (stay && (playerScore > dealerScore)) || (dealerScore > 21)){
         winner = 'player'
-    } else {
+    } else if(playerScore > 21 || dealerScore > playerScore) {
         winner = 'dealer'
-    }
+    } else if (stay && playerScore === dealerScore) {
+        winner = 'tie'
+    } 
 }
 
-const getStatus = () => {
-
-    if (isBust()) {
-        console.log('Dealer wins')
-    } else if (!stay) {
-        console.log('Player Turn')
-    } else if (stay) {
-        checkForWinner()
-        console.log('winner: ', winner)
+// TODO: refactor parameters
+const renderCardImg = (handEl, hand) => {
+    for (card of hand) {
+        $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card">`)
     }
-    console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
 }
 
 const render = () => {
@@ -118,15 +104,17 @@ const render = () => {
     
     renderCardImg('player-hand', playerHand)
     renderCardImg('dealer-hand', dealerHand)
-}
 
-// const deal = (hand, handScore) => {
-//     console.log('deal')
-//     hand.push(draw())
-//     const score = getScore(hand)
-//     handScore = score
-//     debugger
-// }
+    console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
+
+    if (winner || playerHand >= 21) {
+        gameStatus = `Winner: ${winner}\n\nClick \"Play\" to play again.`
+        console.log(gameStatus)
+    } else {
+        gameStatus = "Hit or Stay"
+     console.log(gameStatus)
+    }
+}
 
 const handleClick = (evt) => {
 
@@ -142,8 +130,7 @@ const handleClick = (evt) => {
         }             
     } else {
 
-        playerHand = []
-        dealerHand = []
+        Initialize()
 
         while(playerHand.length < 2) {
             playerHand.push(draw())
@@ -152,7 +139,7 @@ const handleClick = (evt) => {
             dealerScore = getScore(dealerHand) 
         }
     }
-    getStatus()
+    checkForWinner()
     render()
 }
 
