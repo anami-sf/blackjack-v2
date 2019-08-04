@@ -37,14 +37,7 @@ const buildCardDeck = (arr1, arr2) => {
     }
 }
 
-const Initialize = () => {
-    buildCardDeck(numArr, suitArr)
-    playerHand = []
-    dealerHand = []
-    turn = true
-}
 
-Initialize()
 
 /*----- app's state (variables) -----*/ 
 let playerHand, dealerHand, turn;
@@ -54,9 +47,28 @@ let playerHand, dealerHand, turn;
 
 /*----- functions -----*/
 
+const Initialize = () => {
+    buildCardDeck(numArr, suitArr)
+    playerHand = []
+    dealerHand = []
+    turn = true
+}
+
+Initialize()
+
+const iterate = (handEl, hand) => {
+    for (card of hand) {
+        $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card">`)
+    }
+}
+
 const render = () => {
-    // const imgEl = `<img class="cardImg" src=${dealtCard.img}  alt="jQuery">`
-    // $(`#${hand}`).append(imgEl)    
+    
+    $(`#dealer-hand`).html("")
+    $(`#player-hand`).html("")
+    
+    iterate('player-hand', playerHand)
+    iterate('dealer-hand', dealerHand)
 }
 
 
@@ -67,7 +79,8 @@ const draw = (hand) => {
 
 const deal = (evt) => {
 
-    const dealtCard = cardDeck.pop()
+    const dealtCard1 = cardDeck.pop()
+    const dealtCard2 = cardDeck.pop()
     
     if (evt.target.id === "hit") {
         playerHand.push(dealtCard)
@@ -77,12 +90,13 @@ const deal = (evt) => {
 
         playerHand = []
         dealerHand = []
-        debugger
+
         while(playerHand.length < 2) {
-            playerHand.push(dealtCard)
-            dealerHand.push(dealtCard)
+            playerHand.push(dealtCard1)
+            dealerHand.push(dealtCard2)
         }
     }
+    render()
 }
 
 /*----- event listeners -----*/ 
