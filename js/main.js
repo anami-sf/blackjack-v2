@@ -64,21 +64,13 @@ const renderCardImg = (handEl, hand) => {
     }
 }
 
-const render = () => {
-    
-    $(`#dealer-hand`).html("")
-    $(`#player-hand`).html("")
-    
-    renderCardImg('player-hand', playerHand)
-    renderCardImg('dealer-hand', dealerHand)
-}
 
-// TODO: turn into arrow function
-function isBust() {
-    if (playerScore > 21){
-        bust = true
-        return true
-    }    
+
+// TODO: turn into arrow 
+
+const draw = () => {
+    dealtCard = cardDeck.pop()
+    return dealtCard
 }
 
 const getScore = (hand) => {
@@ -90,9 +82,43 @@ const getScore = (hand) => {
     return handScore
 }
 
-const draw = () => {
-    dealtCard = cardDeck.pop()
-    return dealtCard
+function isBust() {
+    if (playerScore > 21){
+        bust = true
+        return true
+    }    
+}
+
+const checkForWinner = () => {
+    if ( playerScore === 21 || (playerScore > dealerScore)){
+        winner = 'player'
+    } else {
+        winner = 'dealer'
+    }
+}
+
+const getStatus = () => {
+    
+    isBust()
+
+    if (bust) {
+        console.log('Dealer wins')
+    } else if (!stay) {
+        console.log('Player Turn')
+    } else if (stay) {
+        checkForWinner()
+        console.log('winner: ', winner)
+    }
+    console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
+}
+
+const render = () => {
+    
+    $(`#dealer-hand`).html("")
+    $(`#player-hand`).html("")
+    
+    renderCardImg('player-hand', playerHand)
+    renderCardImg('dealer-hand', dealerHand)
 }
 
 const deal = (evt) => {
@@ -120,29 +146,6 @@ const deal = (evt) => {
     }
     getStatus()
     render()
-}
-
-const getStatus = () => {
-    
-    isBust()
-
-    if (bust) {
-        console.log('Dealer wins')
-    } else if (!stay) {
-        console.log('Player Turn')
-    } else if (stay) {
-        checkForWinner()
-        console.log('winner: ', winner)
-    }
-    console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
-}
-
-const checkForWinner = () => {
-    if ( playerScore === 21 || (playerScore > dealerScore)){
-        winner = 'player'
-    } else {
-        winner = 'dealer'
-    }
 }
 
 /*----- event listeners -----*/ 
