@@ -1,10 +1,6 @@
 /*----- constants -----*/ 
 
-//const playerHand = 'player-hand'
-//const dealerHand = 'dealer-hand'
-
 //var dealerCards = $('#dealer-hand').children().length
-//var playerCards = $('#player-hand').children().length
 
 const numArr = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A' ];
 const suitArr = ['H', 'D', 'S', 'C' ];
@@ -61,6 +57,7 @@ const Initialize = () => {
 
 Initialize()
 
+// TODO: refactor parameters
 const renderCardImg = (handEl, hand) => {
     for (card of hand) {
         $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card">`)
@@ -92,12 +89,6 @@ const getScore = (hand) => {
 
     return handScore
 }
-
-// if (hand === playerHand){
-//     playerHand = handScore
-// } else if (hand === dealerHand) {
-//     dealerHand = handScore
-// }  
 
 const draw = () => {
     dealtCard = cardDeck.pop()
