@@ -1,7 +1,12 @@
 /*----- constants -----*/ 
 
-const playerHand = 'player-hand'
-const dealerHand = 'dealer-hand'
+//const playerHand = 'player-hand'
+//const dealerHand = 'dealer-hand'
+
+//var dealerCards = $('#dealer-hand').children().length
+//var playerCards = $('#player-hand').children().length
+
+let dealtCard;
 
 const numArr = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A' ];
 const suitArr = ['H', 'D', 'S', 'C' ];
@@ -34,55 +39,50 @@ const buildCardDeck = (arr1, arr2) => {
 
 const Initialize = () => {
     buildCardDeck(numArr, suitArr)
+    playerHand = []
+    dealerHand = []
+    turn = true
 }
 
 Initialize()
 
 /*----- app's state (variables) -----*/ 
+let playerHand, dealerHand, turn;
 /*----- cached element references -----*/
-
-
-//pop card from deck
-//push card into hand
-
-const dealtCard = cardDeck.pop()
 
 
 
 /*----- functions -----*/
 
+const render = () => {
+    // const imgEl = `<img class="cardImg" src=${dealtCard.img}  alt="jQuery">`
+    // $(`#${hand}`).append(imgEl)    
+}
+
+
 const draw = (hand) => {
     const dealtCard = cardDeck.pop()
-    const imgEl = `<img class="cardImg" src=${dealtCard.img}  alt="jQuery">`
-
-    $(`#${hand}`).append(imgEl)    
+    return dealtCard
 }
 
 const deal = (evt) => {
-    
-    console.log('playerCards', playerCards)
 
-    if (evt.target.getAttribute("id") === "hit") {
-        console.log('Cliekd hit')
-        draw(playerHand)
-    } else if (evt.target.getAttribute("id") === "stay") {
-        console.log('Cliekd stay')
-        draw(dealerHand)
+    const dealtCard = cardDeck.pop()
+    
+    if (evt.target.id === "hit") {
+        playerHand.push(dealtCard)
+    } else if (evt.target.id === "stay") {
+        dealerHand.push(dealtCard)
     } else {
 
-        //TODO: switch logic of loop to go by length of each player's hand. 
-
-        var dealerCards = $('#dealer-hand').children().length
-        var playerCards = $('#player-hand').children().length
-
-        numbers = [1,2]
-        for(num of numbers) {
-            console.log('dealerCards', dealerCards)
-            draw(playerHand)
-            draw(dealerHand)
+        playerHand = []
+        dealerHand = []
+        debugger
+        while(playerHand.length < 2) {
+            playerHand.push(dealtCard)
+            dealerHand.push(dealtCard)
         }
     }
-
 }
 
 /*----- event listeners -----*/ 
