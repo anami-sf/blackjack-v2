@@ -1,7 +1,6 @@
+//TODO: Render status
 //TODO: Move play button top and center
 //TODO: Add opening image
-//TODO: Scramble Deck
-//TODO: Render status
 //TODO: Click buttons only when appropriate
 //TODO: Add footer
 //TODO: Make multi-player
