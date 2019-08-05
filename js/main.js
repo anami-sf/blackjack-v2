@@ -134,10 +134,14 @@ const render = () => {
     if (winner || playerHand >= 21) {
         gameStatus = `Winner: ${winner}\n\nClick \"Play\" to play again.`
         console.log(gameStatus)
+        
     } else {
         gameStatus = "Hit or Stay"
      console.log(gameStatus)
     }
+    $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
+    $('#game-status').html(`${gameStatus}`)
+    
 }
 
 const handleClick = (evt) => {
