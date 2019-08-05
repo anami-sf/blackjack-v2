@@ -1,7 +1,6 @@
-//TODO: Render status
-//TODO: Move play button top and center
 //TODO: Add opening image
 //TODO: Click buttons only when appropriate
+//TODO: Move play button top and center
 //TODO: Add footer
 //TODO: Make multi-player
 //TODO: Add money
@@ -131,7 +130,7 @@ const render = () => {
 
     console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
 
-    if (winner || playerHand >= 21) {
+    if ((stay && winner) || playerScore > 21) {
         gameStatus = `Winner: ${winner}\n\nClick \"Play\" to play again.`
         console.log(gameStatus)
         

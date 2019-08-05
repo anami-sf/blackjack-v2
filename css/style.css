@@ -18,10 +18,16 @@ div, footer, input {
     display: inline-block;
 }
 
+#opening-img {
+    width: 50vmin;
+    height: auto;
+    margin: 1vmin;
+}
+
 .cardImg {
     width: 20vmin;
     height: auto;
-    margin: 3vmin;
+    margin: 2vmin;
 }
 
 #dealer-hand {
