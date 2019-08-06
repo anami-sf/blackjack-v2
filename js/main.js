@@ -1,7 +1,9 @@
-//TODO: Add opening image
 //TODO: Click buttons only when appropriate
 //TODO: Move play button top and center
+//TODO: Style Buttons
+//TODO: style game status display
 //TODO: Add footer
+//TODO: re-factor functions
 //TODO: Make multi-player
 //TODO: Add money
 
