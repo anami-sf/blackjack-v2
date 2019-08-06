@@ -1,3 +1,6 @@
+//TODO's:
+//Flip dealers card
+//Tilt cards
 //TODO: Move play button top and center
 //TODO: Style Cards
 //TODO: Style Buttons
@@ -141,7 +144,13 @@ const checkForWinner = () => {
 }
 
 // TODO: refactor parameters
-const renderCardImg = (handEl, hand) => {
+const renderCard = (handEl, hand) => {
+    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card">`)
+    $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back">`)
+
+}
+
+const renderHand = (handEl, hand) => {
     for (card of hand) {
         $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card">`)
     }
@@ -152,8 +161,9 @@ const render = () => {
     $(`#dealer-hand`).html("")
     $(`#player-hand`).html("")
     
-    renderCardImg('player-hand', playerHand)
-    renderCardImg('dealer-hand', dealerHand)
+    renderHand('player-hand', playerHand)
+    renderCard('dealer-hand', dealerHand)
+    //renderHand('dealer-hand', dealerHand)
 
     console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
 
