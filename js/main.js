@@ -147,7 +147,7 @@ const render = () => {
 
 const handleClick = (evt) => {
 
-    if (evt.target.id === "hit") {
+    if ((evt.target.id === "hit") && stay ==false && winner ==false) {
         playerHand.push(draw())
         playerScore = getScore(playerHand)
     } else if (evt.target.id === "stay") {
@@ -156,7 +156,7 @@ const handleClick = (evt) => {
             dealerHand.push(draw()) 
             dealerScore = getScore(dealerHand)        
         }             
-    } else {
+    } else if (evt.target.id === "play") {
 
         Initialize()
 
