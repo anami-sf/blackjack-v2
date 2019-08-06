@@ -12,13 +12,14 @@
         crossorigin="anonymous"></script>
     </head>
     <body>
-        <div><img id="opening-img" src="images/poker-hand.svg" alt=""></div>
-        <div id="dealer-hand" class="hand"></div>
+        <div id="dealer-hand" class="hand"><img id="opening-img" src="images/poker-hand.svg" alt=""></div>
         <div id="player-hand" class="hand" ></div>
         <div id="control-panel">
             <input id="play" class="controlBtn" type="button" value="Play">
-            <input id="hit" class="controlBtn" type="button" value="Hit">
-            <input id="stay" class="controlBtn" type="button" value="Stay">
+            <div>
+                <input id="hit" class="controlBtn" type="button" value="Hit">
+                <input id="stay" class="controlBtn" type="button" value="Stay">
+            </div>       
         </div>
         <div id="score">
             SCORE

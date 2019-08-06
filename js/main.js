@@ -1,6 +1,4 @@
-//TODO: Constrian hit and stay button until play is hit
-//TODO: Play can onl be pressed once
-//TODO: Remove opening image
+//TODO: Toggle opening image
 //TODO: Move play button top and center
 //TODO: Style Cards
 //TODO: Style Buttons
@@ -171,6 +169,7 @@ const render = () => {
     $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
     $('#game-status').html(`${gameStatus}`)
     console.log('winner: ', winner)
+
 }
 
 const handleClick = (evt) => {

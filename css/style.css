@@ -1,6 +1,6 @@
 body {
     background-color: rgb(61, 148, 73);
-    height: 100vmin;
+    height: auto;
     box-sizing: border-box;
     display: flex;
     flex-flow: column nowrap;
@@ -9,6 +9,8 @@ body {
     align-content: center;
 
 }
+
+
 
 div, footer, input {
     margin: 2vmin;
@@ -25,7 +27,7 @@ div, footer, input {
 }
 
 .cardImg {
-    width: 20vmin;
+    width: 15vmin;
     height: auto;
     margin: 2vmin;
 }
@@ -37,5 +39,22 @@ div, footer, input {
 
 #player-hand {
     background-color: rgb(168, 167, 167)
+}
+
+#control-panel {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.controlBtn {
+    display: inline-block;
+}
+
+#play {
+    background-color: orangered;
+    display: block;
 }
 
