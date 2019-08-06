@@ -1,5 +1,4 @@
 //TODO's:
-//Flip dealers card
 //Tilt cards
 //TODO: Move play button top and center
 //TODO: Style Cards
@@ -114,13 +113,12 @@ const adjustForAces = (score) => {
 const getScore = (hand) => {
 
     aceCount = countAces(hand)
-    //debugger
 
     var handScore = hand.reduce( (total, card) => {
         return total + card.value
     },0)
+
     adjustedScore = adjustForAces(handScore)
-    //debugger
 
     return adjustedScore
 }
@@ -143,6 +141,10 @@ const checkForWinner = () => {
     } 
 }
 
+/*----- tilt cards -----*/
+
+
+
 // TODO: refactor parameters
 const renderCard = (handEl, hand) => {
     $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card">`)
@@ -151,10 +153,32 @@ const renderCard = (handEl, hand) => {
 }
 
 const renderHand = (handEl, hand) => {
+
+    let rotation = 0
+    let direction = -1
+    let zIndex = 1
+
     for (card of hand) {
-        $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card">`)
+        
+        rotation = direction*(5)
+        direction *= -1
+        //$(`${card.img}`).attr("transform", `rotate(${rotation}deg)`)
+        //const cardImgEl = 
+        //`${cardImgEl}`
+        //"transform:rotate(${rotation}deg);"
+        $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card" style="transform:rotate(${rotation}deg);zIndex:${zIndex}">`)
+        
+        zIndex += 1
     }
 }
+
+/*----- tilt cards -----*/
+
+const isEven = (arr) => {
+    if ( (arr.length % 2 === 0)){ return true}
+}
+
+/*----- tilt cards -----*/ 
 
 const render = () => {
     
@@ -214,7 +238,6 @@ const handleClick = (evt) => {
 
 /*----- event listeners -----*/ 
 $('#control-panel').on('click', handleClick)
-
 
 
 

@@ -7,9 +7,7 @@ body {
     align-items: center;
     justify-content: center;
     align-content: center;
-
 }
-
 
 
 div, footer, input {
@@ -29,16 +27,20 @@ div, footer, input {
 .cardImg {
     width: 15vmin;
     height: auto;
-    margin: 2vmin;
+
+    /* left: -500px; */
+    /* transition: all .3s ease; */
+
+    /* left: 50%;
+        transform: translateX(-50%) */
 }
 
 #dealer-hand {
     background-color: rgb(61, 148, 73);
-    /* margin-top: 5vmin; */
 }
 
 #player-hand {
-    background-color: rgb(168, 167, 167)
+    background-color: rgb(61, 148, 73);
 }
 
 #control-panel {
