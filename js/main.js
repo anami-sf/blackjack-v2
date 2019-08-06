@@ -1,5 +1,8 @@
-//TODO: Click buttons only when appropriate
+//TODO: Constrian hit and stay button until play is hit
+//TODO: Play can onl be pressed once
+//TODO: Remove opening image
 //TODO: Move play button top and center
+//TODO: Style Cards
 //TODO: Style Buttons
 //TODO: style game status display
 //TODO: Add footer
@@ -13,7 +16,7 @@ const value= (num) => {
     if (typeof num === 'number') {
         return num 
     } else if (num === 'A') { 
-        return 1
+        return 11
     } else {
         return 10
     }
@@ -43,7 +46,7 @@ const buildCardDeck = (arr1, arr2) => {
 
 
 /*----- app's state (variables) -----*/ 
-let playerHand, playerScore, dealerHand, dealerScore, dealtCard, stay, winner, gameStatus;
+let playerHand, playerScore, dealerHand, dealerScore, aceCount, dealtCard, play, stay, winner, gameStatus;
 
 /*----- cached element references -----*/
 
@@ -77,6 +80,8 @@ const Initialize = () => {
     playerScore = 0
     dealerHand = []
     dealerScore = 0
+    aceCount = 0
+    play = false
     stay = false
     winner = null
 }
@@ -88,13 +93,36 @@ const draw = () => {
     return dealtCard
 }
 
+const countAces =  (hand) => {
+    var acesArr = hand.filter((card) => {
+        return card.value === 11
+    })
+    return acesArr.length
+}
+
+const adjustForAces = (score) => {
+    
+    let adjustedScore = score
+    
+    while(adjustedScore > 21 && aceCount > 0){
+        adjustedScore -= 10
+        aceCount -= 1
+    }
+    return adjustedScore  
+}
+
 const getScore = (hand) => {
+
+    aceCount = countAces(hand)
+    //debugger
 
     var handScore = hand.reduce( (total, card) => {
         return total + card.value
     },0)
+    adjustedScore = adjustForAces(handScore)
+    //debugger
 
-    return handScore
+    return adjustedScore
 }
 
 function isBust() {
@@ -108,7 +136,7 @@ function isBust() {
 const checkForWinner = () => {
     if ( playerScore === 21 || (stay && (playerScore > dealerScore)) || (dealerScore > 21)){
         winner = 'player'
-    } else if(playerScore > 21 || dealerScore > playerScore) {
+    } else if(playerScore > 21 || (stay && (dealerScore > playerScore))) {
         winner = 'dealer'
     } else if (stay && playerScore === dealerScore) {
         winner = 'tie'
@@ -132,7 +160,7 @@ const render = () => {
 
     console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
 
-    if ((stay && winner) || playerScore > 21) {
+    if ((stay && winner) || dealerScore === 21 || playerScore > 21) {
         gameStatus = `Winner: ${winner}\n\nClick \"Play\" to play again.`
         console.log(gameStatus)
         
@@ -142,12 +170,12 @@ const render = () => {
     }
     $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
     $('#game-status').html(`${gameStatus}`)
-    
+    console.log('winner: ', winner)
 }
 
 const handleClick = (evt) => {
-
-    if ((evt.target.id === "hit") && stay ==false && winner ==false) {
+    //debugger
+    if ((evt.target.id === "hit") && (stay == false) && (winner == null)) {
         playerHand.push(draw())
         playerScore = getScore(playerHand)
     } else if ((evt.target.id === "stay") && stay == false) {
@@ -159,6 +187,7 @@ const handleClick = (evt) => {
     } else if (evt.target.id === "play") {
 
         Initialize()
+        play = true
 
         while(playerHand.length < 2) {
             playerHand.push(draw())
