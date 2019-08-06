@@ -1,13 +1,12 @@
-//TODO: Toggle opening image
 //TODO: Move play button top and center
 //TODO: Style Cards
 //TODO: Style Buttons
 //TODO: style game status display
 //TODO: Add footer
 //TODO: re-factor functions
-//TODO: Make multi-player
 //TODO: Add money
-
+//TODO: Split
+//TODO: Double down
 /*----- constants -----*/ 
 
 const value= (num) => {

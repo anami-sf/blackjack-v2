@@ -51,6 +51,11 @@ div, footer, input {
 
 .controlBtn {
     display: inline-block;
+    background-color: lightyellow;
+    border: 1.2vmin solid rgb(56, 47, 44);
+    border-radius: 15%;
+    width: 15vmin;
+    padding: 1.5vmin;
 }
 
 #play {
