@@ -150,7 +150,7 @@ const handleClick = (evt) => {
     if ((evt.target.id === "hit") && stay ==false && winner ==false) {
         playerHand.push(draw())
         playerScore = getScore(playerHand)
-    } else if (evt.target.id === "stay") {
+    } else if ((evt.target.id === "stay") && stay == false) {
         stay = true
         while( dealerScore < 18) {
             dealerHand.push(draw()) 
