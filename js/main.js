@@ -162,8 +162,12 @@ const render = () => {
     $(`#player-hand`).html("")
     
     renderHand('player-hand', playerHand)
-    renderCard('dealer-hand', dealerHand)
-    //renderHand('dealer-hand', dealerHand)
+    
+    if (stay==true || winner == true){
+        renderHand('dealer-hand', dealerHand)
+    } else {
+        renderCard('dealer-hand', dealerHand)
+    }
 
     console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
 
