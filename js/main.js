@@ -148,21 +148,20 @@ const checkForWinner = () => {
 
 // TODO: refactor parameters
 const renderCard = (handEl, hand) => {
-    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card">`)
-    $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back">`)
+    $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back" style="transform:rotate(-2deg);zIndex:1;left:15vmin;">`)
+    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;">`)
 
 }
 
 const renderHand = (handEl, hand) => {
 
-    let rotation = 0
+    let rotation = 2
     let direction = -1
     let zIndex = 1
     let left = 15
 
     for (card of hand) {
         
-        rotation = 2*direction
         //$(`${card.img}`).attr("transform", `rotate(${rotation}deg)`)
         //const cardImgEl = 
         //`${cardImgEl}`
@@ -171,7 +170,7 @@ const renderHand = (handEl, hand) => {
         
         zIndex += 1
         left += 7
-        direction *= -1
+        rotation *= -1
     }
 }
 

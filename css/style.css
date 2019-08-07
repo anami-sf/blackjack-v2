@@ -62,7 +62,6 @@ div, footer {
 
 #dealer-hand {
     grid-area: dlrHand;
-    background-color: rgb(61, 148, 73);
 }
 
 .controlBtn {
