@@ -9,6 +9,25 @@ body {
     align-content: center;
 }
 
+body {
+    background-color: rgb(61, 148, 73);
+    box-sizing: border-box;
+    height: 100vh;
+	  grid-template-columns: repeat(3, 1fr);
+	  grid-template-rows: repeat(10, 1fr);
+	  grid-template-areas: 
+	    "empty dlrScore empty"
+        "empty dlrHand empty"
+        "empty dlrHand empty"
+        "stay bet hit"
+        "empty plyrHand empty"
+        "empty plyrHand empty"
+        "empty plyerScore empty"
+        "empty bankTotal empty"
+        "bank bank bank"
+        "ftr ftr ftr";
+	}
+
 
 div, footer, input {
     margin: 2vmin;
