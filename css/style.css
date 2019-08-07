@@ -1,4 +1,4 @@
-body {
+/* body {
     background-color: rgb(61, 148, 73);
     height: auto;
     box-sizing: border-box;
@@ -7,26 +7,38 @@ body {
     align-items: center;
     justify-content: center;
     align-content: center;
-}
+} */
 
-body {
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+    "a status c"
+    "d dlrHand f"
+    "g dlrHand i"
+    "stay bet hit2"
+    "m plyrHand o"
+    "p plyrHand r"
+    "s t u"
+    "v w x"
+    "y z ."
+    ". . ."
+    ;
+      /* "side dlrScore side"
+      "side dlrHand side"
+      "side dlrHand side"
+      "stay bet hit"
+      "side plyrHand side"
+      "side plyrHand side"
+      "side plyrScore side"
+      "side bankTotal side"
+      "bank bank bank"
+      "footer footer footer"; */
     background-color: rgb(61, 148, 73);
     box-sizing: border-box;
-    height: 100vh;
-	  grid-template-columns: repeat(3, 1fr);
-	  grid-template-rows: repeat(10, 1fr);
-	  grid-template-areas: 
-	    "empty dlrScore empty"
-        "empty dlrHand empty"
-        "empty dlrHand empty"
-        "stay bet hit"
-        "empty plyrHand empty"
-        "empty plyrHand empty"
-        "empty plyerScore empty"
-        "empty bankTotal empty"
-        "bank bank bank"
-        "ftr ftr ftr";
-	}
+    /* height: 100vh; */
+}
 
 
 div, footer, input {
@@ -54,13 +66,56 @@ div, footer, input {
         transform: translateX(-50%) */
 }
 
-#dealer-hand {
+.game-status {
+    grid-area: status;
+}
+
+.dealer-hand {
+    grid-area: dlrHand;
     background-color: rgb(61, 148, 73);
 }
 
+#stay {
+    grid-area: stay;
+    background-color: orangered;
+    display: block;
+}
+
+#bet {
+    grid-area: bet;
+}
+
+#hit2 {
+    grid-area: hit2;
+}
+
 #player-hand {
+    grid-area: plyrHand;
     background-color: rgb(61, 148, 73);
 }
+
+#score {
+    grid-area: plyrScore;
+}
+
+#bankTotal {
+    grid-area: bankTotal;
+}
+
+#bank {
+    grid-area: bank;
+}
+
+footer {
+    grid-area: ftr;
+}
+
+#play {
+    background-color: orangered;
+    display: block;
+}
+
+
 
 #control-panel {
     display: flex;
@@ -79,8 +134,5 @@ div, footer, input {
     padding: 1.5vmin;
 }
 
-#play {
-    background-color: orangered;
-    display: block;
-}
+
 

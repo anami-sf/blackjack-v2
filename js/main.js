@@ -237,7 +237,8 @@ const handleClick = (evt) => {
 }
 
 /*----- event listeners -----*/ 
-$('#control-panel').on('click', handleClick)
+$('#hit2').on('click', handleClick)
+$('#stay').on('click', handleClick)
 
 
 
