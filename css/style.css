@@ -9,9 +9,9 @@ body {
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: .5fr 1.5fr auto 1.5fr .5fr .5fr 1fr .5fr;
     grid-template-areas: 
-    "a status c"
+    "a dlrScor c"
     "d dlrHand f"
-    "stay bet hit2"
+    "stay scoreBoard hit2"
     "m plyrHand o"
     "s score u"
     "v bankTotal x"
@@ -24,14 +24,14 @@ body {
 div, footer {
     margin: 2vmin;
     display: flex;
-    flex-wrap: wrap;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
 }
-
+/* 
 .card {
     display: inline-block;
-}
+} */
 
 #opening-img {
     width: 50vmin;
@@ -42,6 +42,8 @@ div, footer {
 .cardImg {
     width: 15vmin;
     height: auto;
+    position: absolute;
+    left: 20vmin;
 
     /* left: -500px; */
     /* transition: all .3s ease; */
@@ -50,11 +52,15 @@ div, footer {
         transform: translateX(-50%) */
 }
 
-.game-status {
+/* #game-status {
     grid-area: status;
+} */
+
+.hand {
+    position: relative;
 }
 
-.dealer-hand {
+#dealer-hand {
     grid-area: dlrHand;
     background-color: rgb(61, 148, 73);
 }
@@ -75,9 +81,10 @@ div, footer {
     background-color: orangered;
 }
 
-#bet {
-    grid-area: bet;
+#scoreBoard {
+    grid-area: scoreBoard;
 }
+
 
 #hit2 {
     grid-area: hit2;

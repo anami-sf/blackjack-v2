@@ -1,11 +1,12 @@
 //TODO's:
 //Tilt cards
+//Score board needs to have 3 divs
+//TODO: re-factor functions
 //TODO: Move play button top and center
 //TODO: Style Cards
 //TODO: Style Buttons
 //TODO: style game status display
 //TODO: Add footer
-//TODO: re-factor functions
 //TODO: Add money
 //TODO: Split
 //TODO: Double down
@@ -157,18 +158,20 @@ const renderHand = (handEl, hand) => {
     let rotation = 0
     let direction = -1
     let zIndex = 1
+    let left = 15
 
     for (card of hand) {
         
-        rotation = direction*(5)
-        direction *= -1
+        rotation = 2*direction
         //$(`${card.img}`).attr("transform", `rotate(${rotation}deg)`)
         //const cardImgEl = 
         //`${cardImgEl}`
         //"transform:rotate(${rotation}deg);"
-        $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card" style="transform:rotate(${rotation}deg);zIndex:${zIndex}">`)
+        $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card" style="transform:rotate(${rotation}deg);zIndex:${zIndex};left:${left}vmin;">`)
         
         zIndex += 1
+        left += 7
+        direction *= -1
     }
 }
 
