@@ -1,5 +1,7 @@
 body {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     width: 100vw;
+    color: rgb(199, 199, 3);
 }
 
 .grid-container {
@@ -40,7 +42,7 @@ div, footer {
 }
 
 .cardImg {
-    width: 15vmin;
+    width: 30vmin;
     height: auto;
     position: absolute;
     left: 20vmin;
@@ -51,10 +53,6 @@ div, footer {
     /* left: 50%;
         transform: translateX(-50%) */
 }
-
-/* #game-status {
-    grid-area: status;
-} */
 
 .hand {
     position: relative;
@@ -82,6 +80,11 @@ div, footer {
 
 #scoreBoard {
     grid-area: scoreBoard;
+}
+
+#winner {
+    color: blue;
+    font-size: 8vmin;
 }
 
 

@@ -1,5 +1,4 @@
 //TODO's:
-//Tilt cards
 //Score board needs to have 3 divs
 //TODO: re-factor functions
 //TODO: Move play button top and center
@@ -149,7 +148,7 @@ const checkForWinner = () => {
 // TODO: refactor parameters
 const renderCard = (handEl, hand) => {
     $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back" style="transform:rotate(-2deg);zIndex:1;left:15vmin;">`)
-    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;">`)
+    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;left:25vmin">`)
 
 }
 
@@ -195,19 +194,24 @@ const render = () => {
         renderCard('dealer-hand', dealerHand)
     }
 
-    console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
 
     if ((stay && winner) || dealerScore === 21 || playerScore > 21) {
-        gameStatus = `Winner: ${winner}\n\nClick \"Play\" to play again.`
-        console.log(gameStatus)
+        gameStatus = `Click \"Play\" to play again.`
         
     } else {
         gameStatus = "Hit or Stay"
-     console.log(gameStatus)
     }
+
     $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
     $('#game-status').html(`${gameStatus}`)
-    console.log('winner: ', winner)
+    console.log('winner:', winner)
+    if (winner === 'player') {
+        $('#winner').html(`You Win!!!`)
+    } else if (winner === 'dealer') {
+        $('#winner').html(`Dealer Wins :(`)
+    } else if (winner === 'tie') {
+        $('#winner').html(`It's a tie -_-`)
+    }
 
 }
 
