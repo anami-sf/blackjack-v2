@@ -1,48 +1,32 @@
-/* body {
-    background-color: rgb(61, 148, 73);
-    height: auto;
-    box-sizing: border-box;
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-} */
+body {
+    width: 100vw;
+}
 
 .grid-container {
+    height: 100vh;
+    /* width: 100vw; */
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: .5fr 1.5fr auto 1.5fr .5fr .5fr 1fr .5fr;
     grid-template-areas: 
     "a status c"
     "d dlrHand f"
-    "g dlrHand i"
     "stay bet hit2"
     "m plyrHand o"
-    "p plyrHand r"
-    "s t u"
-    "v w x"
-    "y z ."
-    ". . ."
-    ;
-      /* "side dlrScore side"
-      "side dlrHand side"
-      "side dlrHand side"
-      "stay bet hit"
-      "side plyrHand side"
-      "side plyrHand side"
-      "side plyrScore side"
-      "side bankTotal side"
-      "bank bank bank"
-      "footer footer footer"; */
+    "s score u"
+    "v bankTotal x"
+    "y bank i"
+    "ftr ftr ftr";
     background-color: rgb(61, 148, 73);
     box-sizing: border-box;
-    /* height: 100vh; */
 }
 
-
-div, footer, input {
+div, footer {
     margin: 2vmin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .card {
@@ -75,10 +59,20 @@ div, footer, input {
     background-color: rgb(61, 148, 73);
 }
 
+.controlBtn {
+    display: block;
+    background-color: lightyellow;
+    border: 5px solid rgb(56, 47, 44);
+    border-radius: 15%;
+    width: 15vmin;
+    height: 10vmin;
+    padding: 1.5vmin;
+    margin: .5vmin;
+}
+
 #stay {
     grid-area: stay;
     background-color: orangered;
-    display: block;
 }
 
 #bet {
@@ -89,13 +83,16 @@ div, footer, input {
     grid-area: hit2;
 }
 
+#play {
+    background-color: orangered;
+}
+
 #player-hand {
     grid-area: plyrHand;
-    background-color: rgb(61, 148, 73);
 }
 
 #score {
-    grid-area: plyrScore;
+    grid-area: score;
 }
 
 #bankTotal {
@@ -108,30 +105,6 @@ div, footer, input {
 
 footer {
     grid-area: ftr;
-}
-
-#play {
-    background-color: orangered;
-    display: block;
-}
-
-
-
-#control-panel {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-}
-
-.controlBtn {
-    display: inline-block;
-    background-color: lightyellow;
-    border: 1.2vmin solid rgb(56, 47, 44);
-    border-radius: 15%;
-    width: 15vmin;
-    padding: 1.5vmin;
 }
 
 
