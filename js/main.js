@@ -87,8 +87,7 @@ const Initialize = () => {
 Initialize()
 
 const draw = () => {
-    dealtCard = cardDeck.pop()
-    return dealtCard
+    return cardDeck.pop()
 }
 
 const countAces =  (hand) => {
@@ -175,21 +174,31 @@ const displayStatus = () => {
     $('#game-status').html(`${gameStatus}`)
 }
 
-const displayWinner = () => {
+const createWinnerMessage = () => {
+    var message
     if (winner === 'player') {
-        return $('#winner').html(`You Win!!!`)
+        message = `You Win!!!`
     } else if (winner === 'dealer') {
-        return $('#winner').html(`Dealer Wins :(`)
+        message = `Dealer Wins :(`
     } else if (winner === 'tie') {
-        return $('#winner').html(`It's a tie -_-`)
+        message = `It's a tie -_-`
     }
+    return message
+}
+
+const displayWinner = () => {
+    $('#winner').html(`${createWinnerMessage()}`)
+}
+
+const clearTable = () => {
+    $(`#dealer-hand`).html("")
+    $(`#player-hand`).html("")
+    $('#winner').html("")
 }
 
 const render = () => {
     
-    $(`#dealer-hand`).html("")
-    $(`#player-hand`).html("")
-    $('#winner').html("")
+    clearTable()
     
     renderHand('player-hand', playerHand)
     
@@ -199,12 +208,11 @@ const render = () => {
         renderCard('dealer-hand', dealerHand)
     }
 
-    displayStatus()
-
-
     $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
+
+    displayStatus()
     
-    displayWinner()
+    if (winner != null) {displayWinner()}
 }
 
 
