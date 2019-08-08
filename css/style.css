@@ -2,6 +2,7 @@ body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     width: 100vw;
     color: rgb(199, 199, 3);
+    background-image: linear-gradient(rgb(54, 172, 70), rgb(85, 65, 59))
 }
 
 .grid-container {
@@ -19,7 +20,7 @@ body {
     "v bankTotal x"
     "y bank i"
     "ftr ftr ftr";
-    background-color: rgb(61, 148, 73);
+    //background-color: rgb(61, 148, 73);
     box-sizing: border-box;
 }
 
