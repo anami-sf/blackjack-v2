@@ -1,5 +1,6 @@
 body {
     width: 100vw;
+    background-image: linear-gradient(rgb(48, 163, 63), rgb(71, 58, 53));
 }
 
 .grid-container {
@@ -17,7 +18,7 @@ body {
     "v bankTotal x"
     "y bank i"
     "ftr ftr ftr";
-    background-color: rgb(61, 148, 73);
+    /* background-color: rgb(61, 148, 73); */
     box-sizing: border-box;
 }
 
@@ -82,6 +83,10 @@ div, footer {
 
 #scoreBoard {
     grid-area: scoreBoard;
+}
+
+#pokerChip {
+    width: 20vmin;
 }
 
 
