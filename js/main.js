@@ -8,7 +8,8 @@
 //TODO: Add money
 //TODO: Split
 //TODO: Double down
-/*----- constants -----*/ 
+
+/*----- Generate Deck  -----*/ 
 
 const value= (num) => {
     if (typeof num === 'number') {
@@ -26,8 +27,6 @@ const suitArr = ['H', 'D', 'S', 'C' ];
 let cardDeck = [];
 
 const buildCardDeck = (arr1, arr2) => { 
- 
-    //TODO: Move value function outside buildCardDeck
 
     for(const num of arr1){
         for(const suit of arr2){
@@ -41,7 +40,6 @@ const buildCardDeck = (arr1, arr2) => {
     }
     return cardDeck
 }
-
 
 /*----- app's state (variables) -----*/ 
 let playerHand, playerScore, dealerHand, dealerScore, aceCount, dealtCard, play, stay, winner, gameStatus;
@@ -71,7 +69,6 @@ function shuffle(array) {
     return array;
   }
 
-
 const Initialize = () => {
     shuffle(buildCardDeck(numArr, suitArr))
     playerHand = []
@@ -86,9 +83,56 @@ const Initialize = () => {
 
 Initialize()
 
-const draw = () => {
+const updateGame = (evt) => {
+
+    checkForWinner()
+    renderGame()
+}
+
+// --------- Deal Hands ----------------//
+
+const drawCard = () => {
     return cardDeck.pop()
 }
+
+const dealCard = (hand) => {
+    hand.push(drawCard())
+    getScore(hand)
+}
+
+const dealOpeningHands = () => {
+    checkForWinner()
+
+    Initialize()
+    play = true
+
+    while(playerHand.length < 2) {
+        dealCard(playerHand)
+        dealCard(dealerHand)
+    }
+    renderGame()
+}
+
+const dealToPlayer = () => {
+    checkForWinner()
+    if ((stay == false) && (winner == null)) {
+        dealCard(playerHand)
+    }
+    renderGame()
+}
+  
+const dealToDealer = () => {
+    checkForWinner()
+    if ((stay == false) && (winner == null)) {
+        stay = true
+        while( dealerScore < 18) {
+            dealCard(dealerHand)
+        }
+    renderGame()
+    }
+}
+
+// ----------- Update game status and Scores -------- //
 
 const countAces =  (hand) => {
     var acesArr = hand.filter((card) => {
@@ -108,6 +152,14 @@ const adjustForAces = (score) => {
     return adjustedScore  
 }
 
+// function isBust() {
+//     if (playerScore <= 21){
+//         return false
+//     } else {
+//         return true
+//     }
+// }
+
 const getScore = (hand) => {
 
     aceCount = countAces(hand)
@@ -116,16 +168,12 @@ const getScore = (hand) => {
         return total + card.value
     },0)
 
-    adjustedScore = adjustForAces(handScore)
+    const adjustedScore = adjustForAces(handScore)
 
-    return adjustedScore
-}
-
-function isBust() {
-    if (playerScore <= 21){
-        return false
-    } else {
-        return true
+    if (hand === playerHand) {
+        playerScore = adjustedScore
+    } else if (hand === dealerHand) {
+        dealerScore = adjustedScore
     }
 }
 
@@ -139,17 +187,20 @@ const checkForWinner = () => {
     } 
 }
 
-const renderCard = (handEl, hand) => {
-    $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back" style="transform:rotate(-2deg);zIndex:1;left:15vmin;">`)
-    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;left:25vmin">`)
+// --------- Rendering Functions -------------- //
 
+const clearGameTable = () => {
+    $(`#dealer-hand`).html("")
+    $(`#player-hand`).html("")
+    $('#winner').html("")
+    //TODO: chnage name of winner element
 }
 
 const renderHand = (handEl, hand) => {
 
     let rotation = 2
     let zIndex = 1
-    let left = 15
+    let left = 20
 
     for (card of hand) {
     
@@ -161,10 +212,21 @@ const renderHand = (handEl, hand) => {
     }
 }
 
-//Refactor winner display:
+const renderHandWithHiddenCard = (handEl, hand) => {
+
+    $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back" style="transform:rotate(-2deg);zIndex:1;left:15vmin;">`)
+    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;left:25vmin">`)
+}
+
+const renderDealerHand = () => {
+    if (stay==true || winner == true){
+        renderHand('dealer-hand', dealerHand)
+    } else {
+        renderHandWithHiddenCard('dealer-hand', dealerHand)
+    }
+}
 
 const displayStatus = () => {
-    console.log('STATUS')
     if ((stay && winner) || dealerScore === 21 || playerScore > 21) {
         gameStatus = `Click \"Play\" to play again.`
         
@@ -172,6 +234,10 @@ const displayStatus = () => {
         gameStatus = "Hit or Stay"
     }
     $('#game-status').html(`${gameStatus}`)
+}
+
+const displayScores = () => {
+    $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
 }
 
 const createWinnerMessage = () => {
@@ -187,68 +253,26 @@ const createWinnerMessage = () => {
 }
 
 const displayWinner = () => {
-    $('#winner').html(`${createWinnerMessage()}`)
+    if (winner != null) {
+        $('#winner').html(`${createWinnerMessage()}`)
+    }  
 }
 
-const clearTable = () => {
-    $(`#dealer-hand`).html("")
-    $(`#player-hand`).html("")
-    $('#winner').html("")
-}
-
-const render = () => {
-    
-    clearTable()
-    
+const renderGame = () => {  
+    clearGameTable()  
     renderHand('player-hand', playerHand)
-    
-    if (stay==true || winner == true){
-        renderHand('dealer-hand', dealerHand)
-    } else {
-        renderCard('dealer-hand', dealerHand)
-    }
-
-    $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
-
+    renderDealerHand()
     displayStatus()
-    
-    if (winner != null) {displayWinner()}
-}
-
-
-
-const handleClick = (evt) => {
-    //debugger
-    if ((evt.target.id === "hit") && (stay == false) && (winner == null)) {
-        playerHand.push(draw())
-        playerScore = getScore(playerHand)
-    } else if ((evt.target.id === "stay") && stay == false) {
-        stay = true
-        while( dealerScore < 18) {
-            dealerHand.push(draw()) 
-            dealerScore = getScore(dealerHand)        
-        }             
-    } else if (evt.target.id === "play") {
-
-        Initialize()
-        play = true
-
-        while(playerHand.length < 2) {
-            playerHand.push(draw())
-            dealerHand.push(draw())
-            playerScore = getScore(playerHand)
-            dealerScore = getScore(dealerHand) 
-        }
-    }
-    checkForWinner()
-    render()
+    displayScores()   
+    displayWinner()
 }
 
 /*----- event listeners -----*/ 
-$('#hit2').on('click', handleClick)
-$('#stay').on('click', handleClick)
 
+//$('.controlBtn').on('click', updateGame)
 
-
+$('#play').on('click', dealOpeningHands)
+$('#hit').on('click', dealToPlayer)
+$('#stay').on('click', dealToDealer)
 
 
