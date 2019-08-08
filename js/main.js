@@ -1,8 +1,7 @@
 //TODO's:
-//Score board needs to have 3 divs
 //TODO: re-factor functions
 //TODO: Move play button top and center
-//TODO: Style Cards
+//TODO: Add nimation 
 //TODO: Style Buttons
 //TODO: style game status display
 //TODO: Add footer
@@ -141,11 +140,6 @@ const checkForWinner = () => {
     } 
 }
 
-/*----- tilt cards -----*/
-
-
-
-// TODO: refactor parameters
 const renderCard = (handEl, hand) => {
     $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back" style="transform:rotate(-2deg);zIndex:1;left:15vmin;">`)
     $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;left:25vmin">`)
@@ -155,16 +149,11 @@ const renderCard = (handEl, hand) => {
 const renderHand = (handEl, hand) => {
 
     let rotation = 2
-    let direction = -1
     let zIndex = 1
     let left = 15
 
     for (card of hand) {
-        
-        //$(`${card.img}`).attr("transform", `rotate(${rotation}deg)`)
-        //const cardImgEl = 
-        //`${cardImgEl}`
-        //"transform:rotate(${rotation}deg);"
+    
         $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card" style="transform:rotate(${rotation}deg);zIndex:${zIndex};left:${left}vmin;">`)
         
         zIndex += 1
@@ -173,18 +162,34 @@ const renderHand = (handEl, hand) => {
     }
 }
 
-/*----- tilt cards -----*/
+//Refactor winner display:
 
-const isEven = (arr) => {
-    if ( (arr.length % 2 === 0)){ return true}
+const displayStatus = () => {
+    console.log('STATUS')
+    if ((stay && winner) || dealerScore === 21 || playerScore > 21) {
+        gameStatus = `Click \"Play\" to play again.`
+        
+    } else {
+        gameStatus = "Hit or Stay"
+    }
+    $('#game-status').html(`${gameStatus}`)
 }
 
-/*----- tilt cards -----*/ 
+const displayWinner = () => {
+    if (winner === 'player') {
+        return $('#winner').html(`You Win!!!`)
+    } else if (winner === 'dealer') {
+        return $('#winner').html(`Dealer Wins :(`)
+    } else if (winner === 'tie') {
+        return $('#winner').html(`It's a tie -_-`)
+    }
+}
 
 const render = () => {
     
     $(`#dealer-hand`).html("")
     $(`#player-hand`).html("")
+    $('#winner').html("")
     
     renderHand('player-hand', playerHand)
     
@@ -194,26 +199,15 @@ const render = () => {
         renderCard('dealer-hand', dealerHand)
     }
 
+    displayStatus()
 
-    if ((stay && winner) || dealerScore === 21 || playerScore > 21) {
-        gameStatus = `Click \"Play\" to play again.`
-        
-    } else {
-        gameStatus = "Hit or Stay"
-    }
 
     $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
-    $('#game-status').html(`${gameStatus}`)
-    console.log('winner:', winner)
-    if (winner === 'player') {
-        $('#winner').html(`You Win!!!`)
-    } else if (winner === 'dealer') {
-        $('#winner').html(`Dealer Wins :(`)
-    } else if (winner === 'tie') {
-        $('#winner').html(`It's a tie -_-`)
-    }
-
+    
+    displayWinner()
 }
+
+
 
 const handleClick = (evt) => {
     //debugger
