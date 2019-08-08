@@ -1,5 +1,7 @@
 //TODO's:
-//TODO: re-factor functions
+//style background
+//create opening HTML page
+//re-factor functions
 //TODO: Move play button top and center
 //TODO: Add nimation 
 //TODO: Style Buttons
@@ -87,49 +89,6 @@ const updateGame = (evt) => {
 
     checkForWinner()
     renderGame()
-}
-
-// --------- Deal Hands ----------------//
-
-const drawCard = () => {
-    return cardDeck.pop()
-}
-
-const dealCard = (hand) => {
-    hand.push(drawCard())
-    getScore(hand)
-}
-
-const dealOpeningHands = () => {
-    checkForWinner()
-
-    Initialize()
-    play = true
-
-    while(playerHand.length < 2) {
-        dealCard(playerHand)
-        dealCard(dealerHand)
-    }
-    renderGame()
-}
-
-const dealToPlayer = () => {
-    checkForWinner()
-    if ((stay == false) && (winner == null)) {
-        dealCard(playerHand)
-    }
-    renderGame()
-}
-  
-const dealToDealer = () => {
-    checkForWinner()
-    if ((stay == false) && (winner == null)) {
-        stay = true
-        while( dealerScore < 18) {
-            dealCard(dealerHand)
-        }
-    renderGame()
-    }
 }
 
 // ----------- Update game status and Scores -------- //
@@ -266,6 +225,49 @@ const renderGame = () => {
     displayScores()   
     displayWinner()
 }
+
+// --------- Deal Hands ----------------//
+
+const drawCard = () => {
+    return cardDeck.pop()
+}
+
+const dealCard = (hand) => {
+    hand.push(drawCard())
+    getScore(hand)
+}
+
+const dealOpeningHands = () => {
+    Initialize()
+    play = true
+
+    while(playerHand.length < 2) {
+        dealCard(playerHand)
+        dealCard(dealerHand)
+    }
+    checkForWinner()
+    renderGame()
+}
+
+const dealToPlayer = () => {
+    if ((stay == false) && (winner == null)) {
+        dealCard(playerHand)
+    }
+    checkForWinner()
+    renderGame()
+}
+  
+const dealToDealer = () => {
+    if ((stay == false) && (winner == null)) {
+        stay = true
+        while( dealerScore < 18) {
+            dealCard(dealerHand)
+        }
+    checkForWinner()
+    renderGame()
+    }
+}
+
 
 /*----- event listeners -----*/ 
 
