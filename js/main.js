@@ -159,7 +159,7 @@ const renderHand = (handEl, hand) => {
 
     let rotation = 2
     let zIndex = 1
-    let left = 20
+    let left = 8
 
     for (card of hand) {
     
@@ -173,8 +173,8 @@ const renderHand = (handEl, hand) => {
 
 const renderHandWithHiddenCard = (handEl, hand) => {
 
-    $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back" style="transform:rotate(-2deg);zIndex:1;left:15vmin;">`)
-    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;left:25vmin">`)
+    $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back" style="transform:rotate(-2deg);zIndex:1;left:4vmin;">`)
+    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;left:11vmin">`)
 }
 
 const renderDealerHand = () => {
