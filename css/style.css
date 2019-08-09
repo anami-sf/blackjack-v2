@@ -81,6 +81,9 @@ div, footer {
 
 #dealerScore {
     grid-area: dealerScore;
+    margin-top: 2vmin;
+    font-size: 5vmin;
+    font-weight: bold;
 }
 
 #dealer-hand {
@@ -125,7 +128,7 @@ div, footer {
     color: rgb(207, 188, 19);
     font-size: 7vmin;
     font-weight: bold;
-    margin: 2vmin;
+    margin: 1vmin;
 }
 
 #hit2 {
@@ -134,16 +137,23 @@ div, footer {
 
 #player-hand {
     grid-area: plyrHand;
-    margin: 10vmin;
+    width: 40vmin;
+    margin: 1vmin;
 }
 
 #score {
-    grid-area: score;
-    margin-top: 5vmin;
+    grid-area: m;
+    margin-top: 2vmin;
+    font-size: 5vmin;
+    font-weight: bold;
+    color: rgb(44, 40, 40);
+    position: relative;
+    left: 5vmin;
 }
 
 #bankTotal {
     grid-area: bank;
+    position: relative;
 }
 
 #bank {
@@ -151,7 +161,11 @@ div, footer {
 }
 
 #chips {
-    width: 60%;
+    width: 100vmin;
+    position: absolute;
+    z-index: -1;
+    left: .1vmin;
+    padding-bottom: 30vmin;
 }
 
 footer {
