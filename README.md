@@ -27,7 +27,7 @@ Blackjack is the American variant of a globally popular banking game known as Tw
 
 ## Screenshots
 
-![Screenshots](images/screenshots/home.PNG | width=50)
+![Screenshots](images/screenshots/home.PNG)
 ![Screenshots](images/screenshots/deal.PNG)
 ![Screenshots](images/screenshots/win.PNG)
 
