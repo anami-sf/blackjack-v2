@@ -123,12 +123,7 @@ const checkForWinner = () => {
 
 // --------- Rendering Functions -------------- //
 
-$(document).ready(function(e) {
-    var width = "+=" + $(document).width();
-    $(playerHand).animate({left: width
-    }, 2000, function () {
-    })
-})
+/////HELPER FUNCTIONS/////
 
 const clearGameTable = () => {
     $(`#dealer-hand`).html("")
@@ -204,6 +199,7 @@ const displayWinner = () => {
         $('#winner').html(`${createWinnerMessage()}`)
     }  
 }
+/////HELPER FUNCTIONS/////
 
 const renderGame = () => {  
     clearGameTable()  
@@ -216,6 +212,7 @@ const renderGame = () => {
 
 // --------- Deal Hands ----------------//
 
+/////HELPER FUNCTIONS/////
 const drawCard = () => {
     return cardDeck.pop()
 }
@@ -224,6 +221,7 @@ const dealCard = (hand) => {
     hand.push(drawCard())
     getScore(hand)
 }
+/////HELPER FUNCTIONS/////
 
 const dealOpeningHands = () => {
     Initialize()
