@@ -1,6 +1,8 @@
 body {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     width: 100vw;
-    background-image: linear-gradient(rgb(48, 163, 63), rgb(71, 58, 53));
+    color: rgb(59, 51, 48);
+    background-image: linear-gradient(rgb(54, 172, 70), rgb(85, 65, 59))
 }
 
 .grid-container {
@@ -8,8 +10,9 @@ body {
     /* width: 100vw; */
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: .5fr 1.5fr auto 1.5fr .5fr .5fr 1fr .5fr;
+    grid-template-rows: .5fr .5fr 1.5fr 1fr 1.5fr .5fr .5fr 1fr .5fr;
     grid-template-areas: 
+    "j dealer z"
     "a dlrScor c"
     "d dlrHand f"
     "stay scoreBoard hit2"
@@ -18,7 +21,6 @@ body {
     "v bankTotal x"
     "y bank i"
     "ftr ftr ftr";
-    /* background-color: rgb(61, 148, 73); */
     box-sizing: border-box;
 }
 
@@ -40,11 +42,16 @@ div, footer {
     margin: 1vmin;
 }
 
+#start {
+    grid-area: plyrHand;
+    background-color: orangered;
+}
+
 .cardImg {
-    width: 15vmin;
+    width: 4em;
     height: auto;
     position: absolute;
-    left: 20vmin;
+    left: 25vmin;
 
     /* left: -500px; */
     /* transition: all .3s ease; */
@@ -53,9 +60,18 @@ div, footer {
         transform: translateX(-50%) */
 }
 
-/* #game-status {
-    grid-area: status;
-} */
+.opening-img {
+    width: 50%;
+}
+
+#dealer {
+    grid-area: d;
+    width: 6em;
+}
+
+#dealerImg {
+    width: 100%;
+}
 
 .hand {
     position: relative;
@@ -67,13 +83,14 @@ div, footer {
 
 .controlBtn {
     display: block;
-    background-color: lightyellow;
+    background-color: lightskyblue;
     border: 5px solid rgb(56, 47, 44);
     border-radius: 15%;
     width: 15vmin;
     height: 10vmin;
     padding: 1.5vmin;
-    margin: .5vmin;
+    /* margin: .5vmin; */
+    margin: 1vmin auto;
 }
 
 #stay {
@@ -83,19 +100,23 @@ div, footer {
 
 #scoreBoard {
     grid-area: scoreBoard;
+    color: rgb(6, 81, 194);
 }
 
 #pokerChip {
     width: 20vmin;
+    margin: 5vmin;
+}
+
+#winner {
+    color: rgb(207, 188, 19);
+    font-size: 6vmin;
+    margin: 2vmin;
 }
 
 
 #hit2 {
     grid-area: hit2;
-}
-
-#play {
-    background-color: orangered;
 }
 
 #player-hand {
@@ -104,6 +125,7 @@ div, footer {
 
 #score {
     grid-area: score;
+    margin: 10vmin;
 }
 
 #bankTotal {
@@ -112,6 +134,10 @@ div, footer {
 
 #bank {
     grid-area: bank;
+}
+
+#chips {
+    width: 100%;
 }
 
 footer {

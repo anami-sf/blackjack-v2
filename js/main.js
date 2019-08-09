@@ -1,16 +1,19 @@
 //TODO's:
-//Tilt cards
-//Score board needs to have 3 divs
-//TODO: re-factor functions
+//style background
+//create opening HTML page
+//re-factor functions
 //TODO: Move play button top and center
-//TODO: Style Cards
+//TODO: Add nimation 
 //TODO: Style Buttons
 //TODO: style game status display
 //TODO: Add footer
 //TODO: Add money
 //TODO: Split
 //TODO: Double down
-/*----- constants -----*/ 
+
+//Card doesn't flip when I loose
+
+/*----- Generate Deck  -----*/ 
 
 const value= (num) => {
     if (typeof num === 'number') {
@@ -28,8 +31,6 @@ const suitArr = ['H', 'D', 'S', 'C' ];
 let cardDeck = [];
 
 const buildCardDeck = (arr1, arr2) => { 
- 
-    //TODO: Move value function outside buildCardDeck
 
     for(const num of arr1){
         for(const suit of arr2){
@@ -43,7 +44,6 @@ const buildCardDeck = (arr1, arr2) => {
     }
     return cardDeck
 }
-
 
 /*----- app's state (variables) -----*/ 
 let playerHand, playerScore, dealerHand, dealerScore, aceCount, dealtCard, play, stay, winner, gameStatus;
@@ -73,7 +73,6 @@ function shuffle(array) {
     return array;
   }
 
-
 const Initialize = () => {
     shuffle(buildCardDeck(numArr, suitArr))
     playerHand = []
@@ -88,10 +87,13 @@ const Initialize = () => {
 
 Initialize()
 
-const draw = () => {
-    dealtCard = cardDeck.pop()
-    return dealtCard
+const updateGame = (evt) => {
+
+    checkForWinner()
+    renderGame()
 }
+
+// ----------- Update game status and Scores -------- //
 
 const countAces =  (hand) => {
     var acesArr = hand.filter((card) => {
@@ -111,6 +113,14 @@ const adjustForAces = (score) => {
     return adjustedScore  
 }
 
+// function isBust() {
+//     if (playerScore <= 21){
+//         return false
+//     } else {
+//         return true
+//     }
+// }
+
 const getScore = (hand) => {
 
     aceCount = countAces(hand)
@@ -119,16 +129,12 @@ const getScore = (hand) => {
         return total + card.value
     },0)
 
-    adjustedScore = adjustForAces(handScore)
+    const adjustedScore = adjustForAces(handScore)
 
-    return adjustedScore
-}
-
-function isBust() {
-    if (playerScore <= 21){
-        return false
-    } else {
-        return true
+    if (hand === playerHand) {
+        playerScore = adjustedScore
+    } else if (hand === dealerHand) {
+        dealerScore = adjustedScore
     }
 }
 
@@ -142,30 +148,23 @@ const checkForWinner = () => {
     } 
 }
 
-/*----- tilt cards -----*/
+// --------- Rendering Functions -------------- //
 
-
-
-// TODO: refactor parameters
-const renderCard = (handEl, hand) => {
-    $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back" style="transform:rotate(-2deg);zIndex:1;left:15vmin;">`)
-    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;">`)
-
+const clearGameTable = () => {
+    $(`#dealer-hand`).html("")
+    $(`#player-hand`).html("")
+    $('#winner').html("")
+    //TODO: chnage name of winner element
 }
 
 const renderHand = (handEl, hand) => {
 
     let rotation = 2
-    let direction = -1
     let zIndex = 1
-    let left = 15
+    let left = 8
 
     for (card of hand) {
-        
-        //$(`${card.img}`).attr("transform", `rotate(${rotation}deg)`)
-        //const cardImgEl = 
-        //`${cardImgEl}`
-        //"transform:rotate(${rotation}deg);"
+    
         $(`#${handEl}`).append(`<img class="cardImg" src=${card.img}  alt="card" style="transform:rotate(${rotation}deg);zIndex:${zIndex};left:${left}vmin;">`)
         
         zIndex += 1
@@ -174,75 +173,110 @@ const renderHand = (handEl, hand) => {
     }
 }
 
-/*----- tilt cards -----*/
+const renderHandWithHiddenCard = (handEl, hand) => {
 
-const isEven = (arr) => {
-    if ( (arr.length % 2 === 0)){ return true}
+    $(`#${handEl}`).append(`<img class="cardImg" src="images/gray_back.jpg"  alt="Card Back" style="transform:rotate(-2deg);zIndex:1;left:4vmin;">`)
+    $(`#${handEl}`).append(`<img class="cardImg" src=${hand[0].img}  alt="card" style="transform:rotate(2deg);zIndex:2;left:11vmin">`)
 }
 
-/*----- tilt cards -----*/ 
-
-const render = () => {
-    
-    $(`#dealer-hand`).html("")
-    $(`#player-hand`).html("")
-    
-    renderHand('player-hand', playerHand)
-    
-    if (stay==true || winner == true){
+const renderDealerHand = () => {
+    console.log(winner)
+    if (stay==true || winner != null){
         renderHand('dealer-hand', dealerHand)
     } else {
-        renderCard('dealer-hand', dealerHand)
+        renderHandWithHiddenCard('dealer-hand', dealerHand)
     }
+}
 
-    console.log('playerScore: ', playerScore, ' dealerScore: ', dealerScore)
-
+const displayStatus = () => {
     if ((stay && winner) || dealerScore === 21 || playerScore > 21) {
-        gameStatus = `Winner: ${winner}\n\nClick \"Play\" to play again.`
-        console.log(gameStatus)
+        gameStatus = "Game Over"
         
     } else {
         gameStatus = "Hit or Stay"
-     console.log(gameStatus)
     }
-    $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
     $('#game-status').html(`${gameStatus}`)
-    console.log('winner: ', winner)
-
 }
 
-const handleClick = (evt) => {
-    //debugger
-    if ((evt.target.id === "hit") && (stay == false) && (winner == null)) {
-        playerHand.push(draw())
-        playerScore = getScore(playerHand)
-    } else if ((evt.target.id === "stay") && stay == false) {
-        stay = true
-        while( dealerScore < 18) {
-            dealerHand.push(draw()) 
-            dealerScore = getScore(dealerHand)        
-        }             
-    } else if (evt.target.id === "play") {
+const displayScores = () => {
+    $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
+}
 
-        Initialize()
-        play = true
+const createWinnerMessage = () => {
+    var message
+    if (winner === 'player') {
+        message = `You Win!!!`
+    } else if (winner === 'dealer') {
+        message = `Dealer Wins :(`
+    } else if (winner === 'tie') {
+        message = `It's a tie -_-`
+    }
+    return message
+}
 
-        while(playerHand.length < 2) {
-            playerHand.push(draw())
-            dealerHand.push(draw())
-            playerScore = getScore(playerHand)
-            dealerScore = getScore(dealerHand) 
-        }
+const displayWinner = () => {
+    if (winner != null) {
+        $('#winner').html(`${createWinnerMessage()}`)
+    }  
+}
+
+const renderGame = () => {  
+    clearGameTable()  
+    renderHand('player-hand', playerHand)
+    renderDealerHand()
+    displayStatus()
+    displayScores()   
+    displayWinner()
+}
+
+// --------- Deal Hands ----------------//
+
+const drawCard = () => {
+    return cardDeck.pop()
+}
+
+const dealCard = (hand) => {
+    hand.push(drawCard())
+    getScore(hand)
+}
+
+const dealOpeningHands = () => {
+    Initialize()
+    play = true
+
+    while(playerHand.length < 2) {
+        dealCard(playerHand)
+        dealCard(dealerHand)
     }
     checkForWinner()
-    render()
+    renderGame()
+}
+
+const dealToPlayer = () => {
+    if ((stay == false) && (winner == null)) {
+        dealCard(playerHand)
+    }
+    checkForWinner()
+    renderGame()
+}
+  
+const dealToDealer = () => {
+    if ((stay == false) && (winner == null)) {
+        stay = true
+        while( dealerScore < 18) {
+            dealCard(dealerHand)
+        }
+    checkForWinner()
+    renderGame()
+    }
 }
 
 /*----- event listeners -----*/ 
-$('#hit2').on('click', handleClick)
-$('#stay').on('click', handleClick)
 
+//$('.controlBtn').on('click', updateGame)
 
-
+$('#play').on('click', dealOpeningHands)
+$('#hit').on('click', dealToPlayer)
+$('#stay').on('click', dealToDealer)
 
 
