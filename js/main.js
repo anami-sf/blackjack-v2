@@ -1,18 +1,3 @@
-//TODO's:
-//style background
-//create opening HTML page
-//re-factor functions
-//TODO: Move play button top and center
-//TODO: Add nimation 
-//TODO: Style Buttons
-//TODO: style game status display
-//TODO: Add footer
-//TODO: Add money
-//TODO: Split
-//TODO: Double down
-
-//Card doesn't flip when I loose
-
 /*----- Generate Deck  -----*/ 
 
 const value= (num) => {
@@ -47,10 +32,6 @@ const buildCardDeck = (arr1, arr2) => {
 
 /*----- app's state (variables) -----*/ 
 let playerHand, playerScore, dealerHand, dealerScore, aceCount, dealtCard, play, stay, winner, gameStatus;
-
-/*----- cached element references -----*/
-
-//var dealerCards = $('#dealer-hand').children().length
 
 /*----- functions -----*/
 
