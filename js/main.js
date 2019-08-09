@@ -150,7 +150,12 @@ const checkForWinner = () => {
 
 // --------- Rendering Functions -------------- //
 
-
+$(document).ready(function(e) {
+    var width = "+=" + $(document).width();
+    $(playerHand).animate({left: width
+    }, 2000, function () {
+    })
+})
 
 const clearGameTable = () => {
     $(`#dealer-hand`).html("")

@@ -80,6 +80,11 @@ div, footer {
     width: 40vmin;
 }
 
+.hand:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
 #dealerScore {
     grid-area: dealerScore;
     margin-top: 2vmin;
@@ -105,6 +110,11 @@ div, footer {
     margin: 1vmin auto;
 }
 
+.controlBtn:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
 #stay {
     grid-area: stay;
     background-color: orangered;
@@ -122,6 +132,16 @@ div, footer {
 
 #pokerChip {
     width: 20vmin;
+}
+
+#pokerChip:hover {
+    animation-duration: 1s;
+    animation-name: spin;
+  }
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
 
 #winner {
