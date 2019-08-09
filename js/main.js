@@ -150,6 +150,8 @@ const checkForWinner = () => {
 
 // --------- Rendering Functions -------------- //
 
+
+
 const clearGameTable = () => {
     $(`#dealer-hand`).html("")
     $(`#player-hand`).html("")

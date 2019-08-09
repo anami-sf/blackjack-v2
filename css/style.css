@@ -50,7 +50,7 @@ div, footer {
 }
 
 .cardImg {
-    width: 4em;
+    width: 6em;
     height: auto;
     position: absolute;
     left: 25vmin;
@@ -77,6 +77,7 @@ div, footer {
 
 .hand {
     position: relative;
+    width: 40vmin;
 }
 
 #dealerScore {
@@ -165,11 +166,12 @@ div, footer {
 }
 
 #chips {
-    width: 100vmin;
+    width: 80vmin;
     position: absolute;
     z-index: -1;
-    left: .1vmin;
+    /* left: .1vmin; */
     padding-bottom: 30vmin;
+    opacity: .6;
 }
 
 footer {
