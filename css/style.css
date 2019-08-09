@@ -89,7 +89,8 @@ div, footer {
     width: 15vmin;
     height: 10vmin;
     padding: 1.5vmin;
-    margin: .5vmin;
+    /* margin: .5vmin; */
+    margin: 1vmin auto;
 }
 
 #stay {

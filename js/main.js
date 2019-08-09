@@ -11,6 +11,8 @@
 //TODO: Split
 //TODO: Double down
 
+//Card doesn't flip when I loose
+
 /*----- Generate Deck  -----*/ 
 
 const value= (num) => {
@@ -178,7 +180,8 @@ const renderHandWithHiddenCard = (handEl, hand) => {
 }
 
 const renderDealerHand = () => {
-    if (stay==true || winner == true){
+    console.log(winner)
+    if (stay==true || winner != null){
         renderHand('dealer-hand', dealerHand)
     } else {
         renderHandWithHiddenCard('dealer-hand', dealerHand)
@@ -267,7 +270,6 @@ const dealToDealer = () => {
     renderGame()
     }
 }
-
 
 /*----- event listeners -----*/ 
 
