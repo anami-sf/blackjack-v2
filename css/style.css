@@ -7,10 +7,9 @@ body {
 
 .grid-container {
     height: 100vh;
-    /* width: 100vw; */
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: .5fr .5fr 1.5fr 1fr 1.5fr .5fr .5fr 1fr .5fr;
+    grid-template-rows: .5fr .5fr 1.5fr 1.5fr 1.5fr .5fr .5fr .5fr;
     grid-template-areas: 
     "j dealer z"
     "a dealerScore c"
@@ -18,7 +17,6 @@ body {
     "stay scoreBoard hit2"
     "m plyrHand o"
     "s score u"
-    "v bankTotal x"
     "y bank i"
     "ftr ftr ftr";
     box-sizing: border-box;
@@ -118,7 +116,7 @@ div, footer {
 #winner {
     width: 100%;
     color: rgb(207, 188, 19);
-    font-size: 1.5em;
+    font-size: 5vmin;
     margin: 2vmin;
 }
 
@@ -128,15 +126,16 @@ div, footer {
 
 #player-hand {
     grid-area: plyrHand;
+    margin: 10vmin;
 }
 
 #score {
     grid-area: score;
-    margin: 10vmin;
+    margin-top: 5vmin;
 }
 
 #bankTotal {
-    grid-area: bankTotal;
+    grid-area: bank;
 }
 
 #bank {
@@ -144,7 +143,7 @@ div, footer {
 }
 
 #chips {
-    width: 100%;
+    width: 60%;
 }
 
 footer {
