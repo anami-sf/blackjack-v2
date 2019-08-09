@@ -199,7 +199,11 @@ const displayStatus = () => {
 }
 
 const displayScores = () => {
-    $('#score').html(`Player: ${playerScore} Dealer: ${dealerScore}`)
+    $('#score').html(`Player: ${playerScore}`)
+    if (stay==true || winner != null){
+        $('#dealerScore').html(`Dealer: ${dealerScore}`)
+    }
+    
 }
 
 const createWinnerMessage = () => {
