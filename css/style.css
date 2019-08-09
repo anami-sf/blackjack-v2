@@ -42,6 +42,11 @@ div, footer {
     margin: 1vmin;
 }
 
+#start {
+    grid-area: plyrHand;
+    background-color: orangered;
+}
+
 .cardImg {
     width: 4em;
     height: auto;
@@ -53,6 +58,10 @@ div, footer {
 
     /* left: 50%;
         transform: translateX(-50%) */
+}
+
+.opening-img {
+    width: 50%;
 }
 
 #dealer {

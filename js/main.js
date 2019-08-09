@@ -187,7 +187,7 @@ const renderDealerHand = () => {
 
 const displayStatus = () => {
     if ((stay && winner) || dealerScore === 21 || playerScore > 21) {
-        gameStatus = `Click \"Play\" to play again.`
+        gameStatus = "Game Over"
         
     } else {
         gameStatus = "Hit or Stay"
