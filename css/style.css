@@ -135,6 +135,10 @@ div, footer {
     grid-area: hit2;
 }
 
+#hit {
+    background-color: lightyellow;
+}
+
 #player-hand {
     grid-area: plyrHand;
     width: 40vmin;
