@@ -113,14 +113,6 @@ const adjustForAces = (score) => {
     return adjustedScore  
 }
 
-// function isBust() {
-//     if (playerScore <= 21){
-//         return false
-//     } else {
-//         return true
-//     }
-// }
-
 const getScore = (hand) => {
 
     aceCount = countAces(hand)
@@ -161,6 +153,7 @@ const clearGameTable = () => {
     $(`#dealer-hand`).html("")
     $(`#player-hand`).html("")
     $('#winner').html("")
+    $('#dealerScore').html("")
     //TODO: chnage name of winner element
 }
 
